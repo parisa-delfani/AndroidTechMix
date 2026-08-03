@@ -25,6 +25,7 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "AndroidTechMix"
 
+include(":app")
 include(":core:common")
 include(":core:domain")
 include(":core:network")
@@ -33,5 +34,5 @@ include(":core:data")
 include(":core:ui")
 include(":core:testing")
 include(":feature:search")
-include(":feature:userdetail")
 include(":feature:favorites")
+include(":feature:userdetail")
