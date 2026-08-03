@@ -17,17 +17,18 @@ Built as a portfolio-ready codebase for senior Android interviews: Clean Archite
  ├── :feature:search
  ├── :feature:favorites
  ├── :feature:userdetail
- ├── :core:ui
- ├── :core:domain   (pure Kotlin models / use cases / repository contracts)
- ├── :core:data     (repository impl + RemoteMediator)
- │    ├── :core:network   (Retrofit + Hilt NetworkModule)
- │    └── :core:database  (Room + Hilt DatabaseModule)
+ ├── :core:designsystem  (theme + primitive Compose components)
+ ├── :core:domain        (repository contracts + use cases)
+ ├── :core:model         (shared pure Kotlin models)
+ ├── :core:data          (repository impl + RemoteMediator)
+ │    ├── :core:network
+ │    └── :core:database
  ├── :core:common
  └── :core:testing
 ```
 
 - **Presentation** — Jetpack Compose, UDF (`UiState` / `UiEvent` / `UiEffect`), Hilt ViewModels, **type-safe Navigation**
-- **Domain** — models, repository contracts, use cases
+- **Domain** — repository contracts and use cases in `:core:domain`; shared models in `:core:model`
 - **Data** — Room as Single Source of Truth, Retrofit writes into Room (RemoteMediator)
 
 ```
