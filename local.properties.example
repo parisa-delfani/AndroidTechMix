@@ -1,0 +1,3 @@
+# Project-specific Gradle settings.
+# GitHub personal access token (optional) — increases API rate limit from 60 to 5000/hour
+# github.token=ghp_your_token_here
