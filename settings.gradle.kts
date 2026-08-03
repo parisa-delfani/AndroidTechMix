@@ -24,3 +24,5 @@ dependencyResolutionManagement {
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "AndroidTechMix"
+
+include(":core:common")
