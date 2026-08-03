@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="favorites_title">Favorites</string>
+    <string name="favorites_empty_title">No favorites yet</string>
+    <string name="favorites_empty_message">Star users from search or profile to keep them here offline.</string>
+    <string name="favorites_go_search">Search users</string>
+</resources>
