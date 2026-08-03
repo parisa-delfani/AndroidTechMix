@@ -1,6 +1,6 @@
 package com.androidtechmix.githubusers.feature.favorites.ui.state
 
-import com.androidtechmix.githubusers.core.domain.model.User
+import com.androidtechmix.githubusers.core.model.User
 
 sealed interface FavoritesUiEvent {
     data class OpenUser(val login: String) : FavoritesUiEvent

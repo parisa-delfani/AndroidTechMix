@@ -4,7 +4,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.androidtechmix.githubusers.core.ui.theme.AndroidTechMixTheme
+import com.androidtechmix.githubusers.core.designsystem.theme.AndroidTechMixTheme
 import com.androidtechmix.githubusers.feature.favorites.ui.FavoritesScreen
 import com.androidtechmix.githubusers.feature.favorites.ui.state.FavoritesUiState
 import androidx.compose.material3.SnackbarHostState

@@ -3,8 +3,8 @@ package com.androidtechmix.githubusers.feature.search.ui
 import androidx.paging.PagingData
 import app.cash.turbine.test
 import com.androidtechmix.githubusers.core.common.result.AppResult
-import com.androidtechmix.githubusers.core.domain.model.User
-import com.androidtechmix.githubusers.core.domain.model.UserDetail
+import com.androidtechmix.githubusers.core.model.User
+import com.androidtechmix.githubusers.core.model.UserDetail
 import com.androidtechmix.githubusers.core.domain.repository.UserRepository
 import com.androidtechmix.githubusers.core.domain.usecase.ObserveFavoritesUseCase
 import com.androidtechmix.githubusers.core.domain.usecase.SearchUsersUseCase

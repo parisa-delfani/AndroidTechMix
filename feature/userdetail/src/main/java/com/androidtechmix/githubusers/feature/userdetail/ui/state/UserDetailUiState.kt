@@ -1,7 +1,7 @@
 package com.androidtechmix.githubusers.feature.userdetail.ui.state
 
 import com.androidtechmix.githubusers.core.common.result.AppError
-import com.androidtechmix.githubusers.core.domain.model.UserDetail
+import com.androidtechmix.githubusers.core.model.UserDetail
 
 data class UserDetailUiState(
     val login: String = "",

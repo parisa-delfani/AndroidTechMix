@@ -7,7 +7,7 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import com.androidtechmix.githubusers.core.common.result.AppResult
 import com.androidtechmix.githubusers.core.common.util.Constants
-import com.androidtechmix.githubusers.core.domain.model.User
+import com.androidtechmix.githubusers.core.model.User
 import com.androidtechmix.githubusers.core.domain.usecase.ObserveFavoritesUseCase
 import com.androidtechmix.githubusers.core.domain.usecase.SearchUsersUseCase
 import com.androidtechmix.githubusers.core.domain.usecase.SetFavoriteUseCase

@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.androidtechmix.githubusers.navigation.GitHubUsersNavHost
-import com.androidtechmix.githubusers.core.ui.theme.AndroidTechMixTheme
+import com.androidtechmix.githubusers.core.designsystem.theme.AndroidTechMixTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

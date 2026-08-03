@@ -1,7 +1,7 @@
 package com.androidtechmix.githubusers.core.data.mapper
 
 import com.androidtechmix.githubusers.core.database.entity.RepoEntity
-import com.androidtechmix.githubusers.core.domain.model.Repository
+import com.androidtechmix.githubusers.core.model.Repository
 import com.androidtechmix.githubusers.core.network.dto.RepositoryDto
 
 fun RepositoryDto.toEntity(ownerLogin: String): RepoEntity = RepoEntity(
