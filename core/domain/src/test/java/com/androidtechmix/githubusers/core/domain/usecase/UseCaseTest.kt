@@ -2,9 +2,9 @@ package com.androidtechmix.githubusers.core.domain.usecase
 
 import androidx.paging.PagingData
 import com.androidtechmix.githubusers.core.common.result.AppResult
-import com.androidtechmix.githubusers.core.domain.model.User
-import com.androidtechmix.githubusers.core.domain.model.UserDetail
 import com.androidtechmix.githubusers.core.domain.repository.UserRepository
+import com.androidtechmix.githubusers.core.model.User
+import com.androidtechmix.githubusers.core.model.UserDetail
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first

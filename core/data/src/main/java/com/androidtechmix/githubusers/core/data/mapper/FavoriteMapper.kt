@@ -1,7 +1,7 @@
 package com.androidtechmix.githubusers.core.data.mapper
 
 import com.androidtechmix.githubusers.core.database.entity.FavoriteEntity
-import com.androidtechmix.githubusers.core.domain.model.User
+import com.androidtechmix.githubusers.core.model.User
 
 fun FavoriteEntity.toDomain(): User = User(
     id = userId,

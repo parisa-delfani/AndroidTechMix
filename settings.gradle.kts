@@ -27,11 +27,12 @@ rootProject.name = "AndroidTechMix"
 
 include(":app")
 include(":core:common")
+include(":core:model")
 include(":core:domain")
 include(":core:network")
 include(":core:database")
 include(":core:data")
-include(":core:ui")
+include(":core:designsystem")
 include(":core:testing")
 include(":feature:search")
 include(":feature:favorites")

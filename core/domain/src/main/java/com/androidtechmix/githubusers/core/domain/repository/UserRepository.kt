@@ -2,8 +2,8 @@ package com.androidtechmix.githubusers.core.domain.repository
 
 import androidx.paging.PagingData
 import com.androidtechmix.githubusers.core.common.result.AppResult
-import com.androidtechmix.githubusers.core.domain.model.User
-import com.androidtechmix.githubusers.core.domain.model.UserDetail
+import com.androidtechmix.githubusers.core.model.User
+import com.androidtechmix.githubusers.core.model.UserDetail
 import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
