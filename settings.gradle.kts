@@ -28,3 +28,4 @@ rootProject.name = "AndroidTechMix"
 include(":core:common")
 include(":core:domain")
 include(":core:network")
+include(":core:database")
