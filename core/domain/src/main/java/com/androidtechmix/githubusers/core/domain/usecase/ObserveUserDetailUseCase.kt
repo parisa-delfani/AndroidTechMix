@@ -1,7 +1,7 @@
 package com.androidtechmix.githubusers.core.domain.usecase
 
-import com.androidtechmix.githubusers.core.domain.model.UserDetail
 import com.androidtechmix.githubusers.core.domain.repository.UserRepository
+import com.androidtechmix.githubusers.core.model.UserDetail
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

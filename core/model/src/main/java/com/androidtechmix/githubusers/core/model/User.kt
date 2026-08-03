@@ -1,4 +1,4 @@
-package com.androidtechmix.githubusers.core.domain.model
+package com.androidtechmix.githubusers.core.model
 
 data class User(
     val id: Long,

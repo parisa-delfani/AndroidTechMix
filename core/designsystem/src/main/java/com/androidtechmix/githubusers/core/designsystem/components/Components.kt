@@ -1,9 +1,8 @@
-package com.androidtechmix.githubusers.core.ui.components
+package com.androidtechmix.githubusers.core.designsystem.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,7 +22,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -38,8 +36,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.androidtechmix.githubusers.core.common.result.AppError
-import com.androidtechmix.githubusers.core.domain.model.User
-import com.androidtechmix.githubusers.core.ui.R
+import com.androidtechmix.githubusers.core.designsystem.R
 
 @Composable
 fun UserAvatar(
@@ -63,7 +60,10 @@ fun UserAvatar(
 
 @Composable
 fun UserListItem(
-    user: User,
+    login: String,
+    avatarUrl: String,
+    type: String,
+    isFavorite: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     onFavoriteClick: (() -> Unit)? = null,
@@ -79,21 +79,21 @@ fun UserListItem(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             UserAvatar(
-                url = user.avatarUrl,
-                contentDescription = user.login,
+                url = avatarUrl,
+                contentDescription = login,
                 size = 52,
             )
             Spacer(Modifier.width(14.dp))
             Column(Modifier.weight(1f)) {
                 Text(
-                    text = user.login,
+                    text = login,
                     style = MaterialTheme.typography.titleMedium,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = user.type,
+                    text = type,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -101,11 +101,11 @@ fun UserListItem(
             if (onFavoriteClick != null) {
                 IconButton(onClick = onFavoriteClick) {
                     Icon(
-                        imageVector = if (user.isFavorite) Icons.Filled.Star else Icons.Filled.StarBorder,
+                        imageVector = if (isFavorite) Icons.Filled.Star else Icons.Filled.StarBorder,
                         contentDescription = stringResource(
-                            if (user.isFavorite) R.string.cd_unfavorite else R.string.cd_favorite,
+                            if (isFavorite) R.string.cd_unfavorite else R.string.cd_favorite,
                         ),
-                        tint = if (user.isFavorite) {
+                        tint = if (isFavorite) {
                             MaterialTheme.colorScheme.tertiary
                         } else {
                             MaterialTheme.colorScheme.onSurfaceVariant
@@ -197,40 +197,5 @@ fun ErrorState(
         TextButton(onClick = onRetry) {
             Text(text = stringResource(R.string.action_retry))
         }
-    }
-}
-
-@Composable
-fun StatChip(
-    label: String,
-    value: String,
-    modifier: Modifier = Modifier,
-) {
-    Surface(
-        modifier = modifier,
-        shape = MaterialTheme.shapes.medium,
-        color = MaterialTheme.colorScheme.surfaceVariant,
-    ) {
-        Column(
-            Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text(text = value, style = MaterialTheme.typography.titleMedium)
-            Text(
-                text = label,
-                style = MaterialTheme.typography.labelLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-        }
-    }
-}
-
-@Composable
-fun ScreenScaffoldPadding(
-    paddingValues: PaddingValues,
-    content: @Composable () -> Unit,
-) {
-    Box(Modifier.padding(paddingValues)) {
-        content()
     }
 }

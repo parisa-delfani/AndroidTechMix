@@ -16,8 +16,8 @@ import com.androidtechmix.githubusers.core.database.GitHubDatabase
 import com.androidtechmix.githubusers.core.database.dao.FavoriteDao
 import com.androidtechmix.githubusers.core.database.dao.UserDao
 import com.androidtechmix.githubusers.core.database.dao.UserDetailDao
-import com.androidtechmix.githubusers.core.domain.model.User
-import com.androidtechmix.githubusers.core.domain.model.UserDetail
+import com.androidtechmix.githubusers.core.model.User
+import com.androidtechmix.githubusers.core.model.UserDetail
 import com.androidtechmix.githubusers.core.domain.repository.UserRepository
 import com.androidtechmix.githubusers.core.network.api.GitHubApi
 import com.androidtechmix.githubusers.core.network.error.mapToAppError
