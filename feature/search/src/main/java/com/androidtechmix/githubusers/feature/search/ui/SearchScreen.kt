@@ -39,10 +39,10 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import com.androidtechmix.githubusers.core.common.result.toAppError
-import com.androidtechmix.githubusers.core.domain.model.User
-import com.androidtechmix.githubusers.core.ui.components.EmptyState
-import com.androidtechmix.githubusers.core.ui.components.ErrorState
-import com.androidtechmix.githubusers.core.ui.components.UserListItem
+import com.androidtechmix.githubusers.core.model.User
+import com.androidtechmix.githubusers.core.designsystem.components.EmptyState
+import com.androidtechmix.githubusers.core.designsystem.components.ErrorState
+import com.androidtechmix.githubusers.core.designsystem.components.UserListItem
 import com.androidtechmix.githubusers.feature.search.R
 import com.androidtechmix.githubusers.feature.search.ui.state.SearchUiEffect
 import com.androidtechmix.githubusers.feature.search.ui.state.SearchUiEvent
@@ -168,7 +168,10 @@ fun SearchScreen(
                             ) { index ->
                                 val user = users[index] ?: return@items
                                 UserListItem(
-                                    user = user,
+                                    login = user.login,
+                                    avatarUrl = user.avatarUrl,
+                                    type = user.type,
+                                    isFavorite = user.isFavorite,
                                     onClick = { onEvent(SearchUiEvent.OpenUser(user.login)) },
                                     onFavoriteClick = { onEvent(SearchUiEvent.ToggleFavorite(user)) },
                                 )

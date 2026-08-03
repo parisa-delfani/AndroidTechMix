@@ -21,9 +21,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.androidtechmix.githubusers.core.ui.components.EmptyState
-import com.androidtechmix.githubusers.core.ui.components.FullScreenLoading
-import com.androidtechmix.githubusers.core.ui.components.UserListItem
+import com.androidtechmix.githubusers.core.designsystem.components.EmptyState
+import com.androidtechmix.githubusers.core.designsystem.components.FullScreenLoading
+import com.androidtechmix.githubusers.core.designsystem.components.UserListItem
 import com.androidtechmix.githubusers.feature.favorites.R
 import com.androidtechmix.githubusers.feature.favorites.ui.state.FavoritesUiEffect
 import com.androidtechmix.githubusers.feature.favorites.ui.state.FavoritesUiEvent
@@ -94,7 +94,10 @@ fun FavoritesScreen(
                         key = { it.id },
                     ) { user ->
                         UserListItem(
-                            user = user,
+                            login = user.login,
+                            avatarUrl = user.avatarUrl,
+                            type = user.type,
+                            isFavorite = user.isFavorite,
                             onClick = { onEvent(FavoritesUiEvent.OpenUser(user.login)) },
                             onFavoriteClick = { onEvent(FavoritesUiEvent.RemoveFavorite(user)) },
                         )

@@ -1,4 +1,4 @@
-package com.androidtechmix.githubusers.core.ui.theme
+package com.androidtechmix.githubusers.core.designsystem.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

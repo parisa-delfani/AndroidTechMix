@@ -4,12 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.androidtechmix.githubusers.core.ui"
+    namespace = "com.androidtechmix.githubusers.core.designsystem"
 }
 
 dependencies {
     implementation(projects.core.common)
-    implementation(projects.core.domain)
     implementation(libs.coil.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
 }
