@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cd_back">Navigate back</string>
+    <string name="cd_share">Share profile</string>
+    <string name="cd_favorite">Add to favorites</string>
+    <string name="cd_unfavorite">Remove from favorites</string>
+    <string name="stat_repos">Repos</string>
+    <string name="stat_followers">Followers</string>
+    <string name="stat_following">Following</string>
+    <string name="meta_company">Company · %1$s</string>
+    <string name="meta_location">Location · %1$s</string>
+    <string name="meta_blog">Blog · %1$s</string>
+    <string name="repos_title">Top repositories</string>
+    <string name="repos_empty">No public repositories to show.</string>
+    <string name="repo_stars">★ %1$d</string>
+    <string name="repo_forks">⑂ %1$d</string>
+</resources>
