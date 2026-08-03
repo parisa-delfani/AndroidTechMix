@@ -50,10 +50,7 @@ dependencies {
     implementation(projects.feature.favorites)
     implementation(projects.feature.userdetail)
     implementation(projects.core.data)
-    implementation(projects.core.network)
-    implementation(projects.core.database)
-    implementation(projects.core.domain)
-    implementation(projects.core.ui)
+    implementation(projects.core.designsystem)
     implementation(projects.core.common)
 
     implementation(libs.androidx.core.ktx)

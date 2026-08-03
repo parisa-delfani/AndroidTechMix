@@ -10,8 +10,8 @@ android {
 dependencies {
     implementation(projects.core.common)
     implementation(projects.core.domain)
-    implementation(projects.core.network)
-    implementation(projects.core.database)
+    api(projects.core.network)
+    api(projects.core.database)
 
     implementation(libs.paging.runtime)
     implementation(libs.kotlinx.coroutines.android)
