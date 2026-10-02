@@ -4,6 +4,8 @@
     <string name="cd_share">Share profile</string>
     <string name="cd_favorite">Add to favorites</string>
     <string name="cd_unfavorite">Remove from favorites</string>
+    <string name="cd_compare">Compare with a favorite</string>
+    <string name="compare_picker_title">Compare with</string>
     <string name="stat_repos">Repos</string>
     <string name="stat_followers">Followers</string>
     <string name="stat_following">Following</string>

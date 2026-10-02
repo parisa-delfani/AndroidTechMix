@@ -5,6 +5,9 @@ import android.net.Uri
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,11 +22,13 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.StarBorder
+import androidx.compose.material.icons.automirrored.filled.CompareArrows
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -47,6 +52,7 @@ import com.androidtechmix.githubusers.core.model.UserDetail
 import com.androidtechmix.githubusers.core.designsystem.components.ErrorState
 import com.androidtechmix.githubusers.core.designsystem.components.FullScreenLoading
 import com.androidtechmix.githubusers.core.designsystem.components.UserAvatar
+import com.androidtechmix.githubusers.core.designsystem.components.UserListItem
 import com.androidtechmix.githubusers.feature.userdetail.ui.components.StatChip
 import kotlinx.coroutines.flow.collectLatest
 import com.androidtechmix.githubusers.feature.userdetail.R
@@ -57,6 +63,7 @@ import com.androidtechmix.githubusers.feature.userdetail.ui.state.UserDetailUiSt
 @Composable
 fun UserDetailRoute(
     onBack: () -> Unit,
+    onCompare: (left: String, right: String) -> Unit,
     viewModel: UserDetailViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -79,6 +86,7 @@ fun UserDetailRoute(
                     context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(effect.url)))
                 }
                 is UserDetailUiEffect.ShowMessage -> snackbarHostState.showSnackbar(effect.message)
+                is UserDetailUiEffect.NavigateToCompare -> onCompare(effect.left, effect.right)
             }
         }
     }
@@ -110,6 +118,15 @@ fun UserDetailScreen(
                     }
                 },
                 actions = {
+                    IconButton(
+                        onClick = { onEvent(UserDetailUiEvent.OpenCompare) },
+                        enabled = uiState.detail != null,
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.CompareArrows,
+                            contentDescription = stringResource(R.string.cd_compare),
+                        )
+                    }
                     IconButton(onClick = { onEvent(UserDetailUiEvent.Share) }) {
                         Icon(
                             imageVector = Icons.Filled.Share,
@@ -157,6 +174,36 @@ fun UserDetailScreen(
                     UserDetailContent(
                         detail = uiState.detail,
                         onOpenUrl = { onEvent(UserDetailUiEvent.OpenUrl(it)) },
+                    )
+                }
+            }
+        }
+    }
+    if (uiState.comparePickerVisible) {
+        ModalBottomSheet(
+            onDismissRequest = { onEvent(UserDetailUiEvent.DismissComparePicker) },
+        ) {
+            Text(
+                text = stringResource(R.string.compare_picker_title),
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.padding(horizontal = 16.dp),
+            )
+            LazyColumn(
+                modifier = Modifier
+                    .heightIn(max = 420.dp)
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                items(
+                    items = uiState.compareCandidates,
+                    key = { it.id },
+                ) { user ->
+                    UserListItem(
+                        login = user.login,
+                        avatarUrl = user.avatarUrl,
+                        type = user.type,
+                        isFavorite = true,
+                        onClick = { onEvent(UserDetailUiEvent.SelectCompareTarget(user.login)) },
                     )
                 }
             }

@@ -1,6 +1,7 @@
 package com.androidtechmix.githubusers.feature.userdetail.ui.state
 
 import com.androidtechmix.githubusers.core.common.result.AppError
+import com.androidtechmix.githubusers.core.model.User
 import com.androidtechmix.githubusers.core.model.UserDetail
 
 data class UserDetailUiState(
@@ -8,4 +9,6 @@ data class UserDetailUiState(
     val detail: UserDetail? = null,
     val isRefreshing: Boolean = false,
     val error: AppError? = null,
+    val compareCandidates: List<User> = emptyList(),
+    val comparePickerVisible: Boolean = false,
 )

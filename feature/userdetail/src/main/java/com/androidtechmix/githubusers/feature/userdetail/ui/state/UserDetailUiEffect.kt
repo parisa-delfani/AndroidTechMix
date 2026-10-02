@@ -5,4 +5,5 @@ sealed interface UserDetailUiEffect {
     data class ShareProfile(val url: String, val login: String) : UserDetailUiEffect
     data class OpenUrl(val url: String) : UserDetailUiEffect
     data class ShowMessage(val message: String) : UserDetailUiEffect
+    data class NavigateToCompare(val left: String, val right: String) : UserDetailUiEffect
 }

@@ -6,4 +6,7 @@ sealed interface UserDetailUiEvent {
     data object Share : UserDetailUiEvent
     data object NavigateBack : UserDetailUiEvent
     data class OpenUrl(val url: String) : UserDetailUiEvent
+    data object OpenCompare : UserDetailUiEvent
+    data object DismissComparePicker : UserDetailUiEvent
+    data class SelectCompareTarget(val login: String) : UserDetailUiEvent
 }
