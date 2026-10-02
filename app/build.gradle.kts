@@ -49,6 +49,7 @@ dependencies {
     implementation(projects.feature.search)
     implementation(projects.feature.favorites)
     implementation(projects.feature.userdetail)
+    implementation(projects.feature.compare)
     implementation(projects.core.data)
     implementation(projects.core.designsystem)
     implementation(projects.core.common)

@@ -23,6 +23,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.androidtechmix.githubusers.R
+import com.androidtechmix.githubusers.feature.compare.navigation.CompareDestination
+import com.androidtechmix.githubusers.feature.compare.ui.CompareRoute
 import com.androidtechmix.githubusers.feature.favorites.navigation.FavoritesDestination
 import com.androidtechmix.githubusers.feature.favorites.ui.FavoritesRoute
 import com.androidtechmix.githubusers.feature.search.navigation.SearchDestination
@@ -108,6 +110,11 @@ fun GitHubUsersNavHost() {
                     onOpenUser = { login ->
                         navController.navigate(UserDetailDestination(login = login))
                     },
+                    onCompare = { left, right ->
+                        navController.navigate(CompareDestination(left = left, right = right)) {
+                            launchSingleTop = true
+                        }
+                    },
                     onGoToSearch = {
                         navController.navigate(SearchDestination) {
                             popUpTo(navController.graph.findStartDestination().id) {
@@ -120,7 +127,17 @@ fun GitHubUsersNavHost() {
                 )
             }
             composable<UserDetailDestination> {
-                UserDetailRoute(onBack = { navController.popBackStack() })
+                UserDetailRoute(
+                    onBack = { navController.popBackStack() },
+                    onCompare = { left, right ->
+                        navController.navigate(CompareDestination(left = left, right = right)) {
+                            launchSingleTop = true
+                        }
+                    },
+                )
+            }
+            composable<CompareDestination> {
+                CompareRoute(onBack = { navController.popBackStack() })
             }
         }
     }
