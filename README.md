@@ -9,6 +9,7 @@ Built as a portfolio-ready codebase for senior Android interviews: Clean Archite
 - **Search** — debounced GitHub user search with Paging 3 + RemoteMediator cache
 - **User detail** — profile stats, bio, metadata, top repositories, share, favorite
 - **Favorites** — Room-backed offline list
+- **Compare** — two profiles side by side: repos, followers, following, and languages from cached top repositories
 
 ## Architecture
 
@@ -17,6 +18,7 @@ Built as a portfolio-ready codebase for senior Android interviews: Clean Archite
  ├── :feature:search
  ├── :feature:favorites
  ├── :feature:userdetail
+ ├── :feature:compare
  ├── :core:designsystem  (theme + primitive Compose components)
  ├── :core:domain        (repository contracts + use cases)
  ├── :core:model         (shared pure Kotlin models)
