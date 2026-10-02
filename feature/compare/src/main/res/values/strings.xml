@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="compare_title">Compare</string>
+    <string name="cd_back">Navigate back</string>
+    <string name="compare_same_user_title">Pick two different users</string>
+    <string name="compare_same_user_message">A profile can\'t be compared with itself.</string>
+    <string name="compare_invalid_title">Comparison unavailable</string>
+    <string name="compare_invalid_message">This comparison is missing a user.</string>
+    <string name="compare_side_failed">Couldn\'t load this profile.</string>
+    <string name="compare_retry">Retry</string>
+    <string name="compare_repos">Repos</string>
+    <string name="compare_followers">Followers</string>
+    <string name="compare_following">Following</string>
+    <string name="compare_languages_title">Languages in top repositories</string>
+    <string name="compare_languages_empty">No languages in the cached top repositories.</string>
+    <string name="compare_shared_empty">No shared languages.</string>
+    <string name="compare_shared">Shared</string>
+    <string name="compare_only_on">Only on %1$s</string>
+    <string name="compare_shared_counts">%1$d / %2$d</string>
+</resources>
