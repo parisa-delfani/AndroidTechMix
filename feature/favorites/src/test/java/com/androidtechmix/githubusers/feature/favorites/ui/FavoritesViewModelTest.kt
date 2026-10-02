@@ -9,6 +9,7 @@ import com.androidtechmix.githubusers.core.domain.repository.UserRepository
 import com.androidtechmix.githubusers.core.domain.usecase.ObserveFavoritesUseCase
 import com.androidtechmix.githubusers.core.domain.usecase.SetFavoriteUseCase
 import com.androidtechmix.githubusers.core.testing.MainDispatcherRule
+import com.androidtechmix.githubusers.feature.favorites.ui.state.FavoritesUiEffect
 import com.androidtechmix.githubusers.feature.favorites.ui.state.FavoritesUiEvent
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.Flow
@@ -86,6 +87,48 @@ class FavoritesViewModelTest {
             cancelAndIgnoreRemainingEvents()
         }
     }
+
+    @Test
+    fun `compare mode confirms the two selected logins in order`() = runTest {
+        val first = user(1, "octocat")
+        val second = user(2, "torvalds")
+        val repo = object : UserRepository by EmptyUserRepository() {
+            override fun observeFavorites(): Flow<List<User>> = flowOf(listOf(first, second))
+        }
+        val viewModel = FavoritesViewModel(
+            observeFavorites = ObserveFavoritesUseCase(repo),
+            setFavorite = SetFavoriteUseCase(repo),
+        )
+
+        viewModel.uiState.test {
+            skipItems(1)
+            advanceUntilIdle()
+            viewModel.onEvent(FavoritesUiEvent.ToggleCompareMode)
+            viewModel.onEvent(FavoritesUiEvent.ToggleCompareSelection("torvalds"))
+            viewModel.onEvent(FavoritesUiEvent.ToggleCompareSelection("octocat"))
+            advanceUntilIdle()
+            assertThat(expectMostRecentItem().selectedLogins).containsExactly("torvalds", "octocat").inOrder()
+            cancelAndIgnoreRemainingEvents()
+        }
+
+        viewModel.effects.test {
+            viewModel.onEvent(FavoritesUiEvent.ConfirmCompare)
+            advanceUntilIdle()
+            assertThat(awaitItem()).isEqualTo(
+                FavoritesUiEffect.NavigateToCompare(left = "torvalds", right = "octocat"),
+            )
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
+
+    private fun user(id: Long, login: String) = User(
+        id = id,
+        login = login,
+        avatarUrl = "url",
+        htmlUrl = "html",
+        type = "User",
+        isFavorite = true,
+    )
 }
 
 private open class EmptyUserRepository : UserRepository {

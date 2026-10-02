@@ -5,4 +5,6 @@ import com.androidtechmix.githubusers.core.model.User
 data class FavoritesUiState(
     val favorites: List<User> = emptyList(),
     val isLoading: Boolean = true,
+    val compareMode: Boolean = false,
+    val selectedLogins: List<String> = emptyList(),
 )

@@ -11,9 +11,10 @@ import com.androidtechmix.githubusers.feature.favorites.ui.state.FavoritesUiStat
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -25,9 +26,23 @@ class FavoritesViewModel @Inject constructor(
     private val setFavorite: SetFavoriteUseCase,
 ) : ViewModel() {
 
-    val uiState: StateFlow<FavoritesUiState> = observeFavorites()
-        .map { FavoritesUiState(favorites = it, isLoading = false) }
-        .stateIn(
+    private val compareMode = MutableStateFlow(false)
+    private val selectedLogins = MutableStateFlow<List<String>>(emptyList())
+
+    val uiState: StateFlow<FavoritesUiState> = combine(
+        observeFavorites(),
+        compareMode,
+        selectedLogins,
+    ) { favorites, mode, selected ->
+        val visibleLogins = favorites.map { it.login }.toSet()
+        val inMode = mode && favorites.size >= 2
+        FavoritesUiState(
+            favorites = favorites,
+            isLoading = false,
+            compareMode = inMode,
+            selectedLogins = if (inMode) selected.filter { it in visibleLogins }.take(2) else emptyList(),
+        )
+    }.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = FavoritesUiState(),
@@ -53,6 +68,46 @@ class FavoritesViewModel @Inject constructor(
                     }
                 }
             }
+            FavoritesUiEvent.ToggleCompareMode -> {
+                if (uiState.value.favorites.size >= 2) {
+                    compareMode.value = true
+                }
+            }
+            FavoritesUiEvent.CancelCompare -> clearCompare()
+            is FavoritesUiEvent.ToggleCompareSelection -> toggleSelection(event.login)
+            FavoritesUiEvent.ConfirmCompare -> confirmCompare()
         }
+    }
+
+    private fun toggleSelection(login: String) {
+        if (!compareMode.value) return
+        val visible = uiState.value.favorites.map { it.login }.toSet()
+        if (login !in visible) return
+        val current = selectedLogins.value.filter { it in visible }
+        selectedLogins.value = when {
+            login in current -> current.filterNot { it == login }
+            current.size >= 2 -> {
+                viewModelScope.launch {
+                    _effects.send(FavoritesUiEffect.ShowMessage("You can compare two users"))
+                }
+                current
+            }
+            else -> current + login
+        }
+    }
+
+    private fun confirmCompare() {
+        val visible = uiState.value.favorites.map { it.login }.toSet()
+        val selected = selectedLogins.value.filter { it in visible }.take(2)
+        if (selected.size != 2) return
+        viewModelScope.launch {
+            _effects.send(FavoritesUiEffect.NavigateToCompare(selected[0], selected[1]))
+        }
+        clearCompare()
+    }
+
+    private fun clearCompare() {
+        compareMode.value = false
+        selectedLogins.value = emptyList()
     }
 }

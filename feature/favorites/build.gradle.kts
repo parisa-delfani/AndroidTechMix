@@ -5,3 +5,7 @@ plugins {
 android {
     namespace = "com.androidtechmix.githubusers.feature.favorites"
 }
+
+dependencies {
+    implementation(libs.androidx.activity.compose)
+}
