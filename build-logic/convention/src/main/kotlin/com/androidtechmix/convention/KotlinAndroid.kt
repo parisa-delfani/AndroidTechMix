@@ -1,14 +1,11 @@
 package com.androidtechmix.convention
 
-import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
-import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
-import org.gradle.api.plugins.JavaPluginExtension
-import org.gradle.kotlin.dsl.configure
+import org.gradle.api.tasks.testing.Test
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.withType
@@ -19,23 +16,22 @@ internal val Project.libs: VersionCatalog
     get() = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
 internal fun Project.configureKotlinAndroid(
-    commonExtension: CommonExtension<*, *, *, *, *, *>,
+    commonExtension: CommonExtension,
 ) {
-    commonExtension.apply {
-        compileSdk = 36
-
-        defaultConfig {
-            minSdk = 26
-            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        }
-
-        compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_17
-            targetCompatibility = JavaVersion.VERSION_17
-        }
+    commonExtension.compileSdk = 36
+    commonExtension.defaultConfig.apply {
+        minSdk = 26
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    commonExtension.compileOptions.apply {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
     configureKotlin()
+    // Robolectric on API 36 touches JDK internals that the test worker must open.
+    tasks.withType<Test>().configureEach {
+        jvmArgs("--add-opens=java.base/jdk.internal.access=ALL-UNNAMED")
+    }
 }
 
 internal fun Project.configureKotlin() {
@@ -51,13 +47,9 @@ internal fun Project.configureKotlin() {
 }
 
 internal fun Project.configureAndroidCompose(
-    commonExtension: CommonExtension<*, *, *, *, *, *>,
+    commonExtension: CommonExtension,
 ) {
-    commonExtension.apply {
-        buildFeatures {
-            compose = true
-        }
-    }
+    commonExtension.buildFeatures.compose = true
 
     pluginManager.apply("org.jetbrains.kotlin.plugin.compose")
 
