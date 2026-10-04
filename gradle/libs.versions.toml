@@ -1,12 +1,12 @@
 [versions]
-agp = "8.10.1"
+agp = "9.4.1"
 javaxInject = "1"
-kotlin = "2.1.21"
-ksp = "2.1.21-2.0.1"
+kotlin = "2.2.10"
+ksp = "2.3.12"
 composeBom = "2025.06.01"
 coroutines = "1.10.2"
 serialization = "1.8.1"
-hilt = "2.56.2"
+hilt = "2.60.1"
 androidxHilt = "1.2.0"
 lifecycle = "2.9.1"
 navigation = "2.9.0"
@@ -30,7 +30,7 @@ coroutinesTest = "1.10.2"
 androidxTestCore = "1.6.1"
 androidxTestRunner = "1.6.2"
 androidxTestRules = "1.6.1"
-robolectric = "4.14.1"
+robolectric = "4.17"
 
 [libraries]
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
